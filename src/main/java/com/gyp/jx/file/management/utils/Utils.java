@@ -1,5 +1,9 @@
 package com.gyp.jx.file.management.utils;
 
+import cn.hutool.core.util.ReUtil;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,11 +13,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.ReUtil;
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
-
 @Log4j2
 public class Utils {
 
@@ -22,7 +21,7 @@ public class Utils {
         return ReUtil.replaceAll(fileName, "\\d+", (match) -> StringUtils.leftPad(match.group(), 6, "0"));
     }
 
-    public static List<Path> chinaSort(List<Path> list) {
+    public static void chinaSort(List<Path> list) {
         list.sort((o1, o2) -> {
             if ((Files.isRegularFile(o1) == Files.isRegularFile(o2)) || (Files.isDirectory(o1) == Files.isDirectory(o2))) {
                 String d1Name = o1.getFileName() == null ? "" : formatFileNameNumber(o1.getFileName().toString());
@@ -36,7 +35,6 @@ public class Utils {
                 return 1;
             }
         });
-        return list;
     }
 
 
@@ -87,8 +85,8 @@ public class Utils {
             builder.redirectErrorStream(true);
             builder.start();
         } catch (IOException e) {
-            e.printStackTrace();
-            log.info("创建Linux链接失败！源文件地址：" + sourceUrl + "，目标地址：" + targetUrl);
+            log.error("创建Linux链接失败！源文件地址：" + sourceUrl + "，目标地址：" + targetUrl);
+            log.error(e);
         }
     }
 
@@ -109,8 +107,8 @@ public class Utils {
             builder.redirectErrorStream(true);
             builder.start();
         } catch (IOException e) {
-            e.printStackTrace();
-            log.info("删除失败，删除地址：" + url);
+            log.error("删除失败，删除地址：" + url);
+            log.error(e);
         }
     }
 

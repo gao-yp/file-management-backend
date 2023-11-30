@@ -20,10 +20,8 @@ public class WebfluxSecurityConfig {
 
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .securityMatcher(new AndServerWebExchangeMatcher(matcher1))
-                .authorizeExchange((exchanges) -> {
-                            exchanges
-                                    .anyExchange().authenticated();
-                        }
+                .authorizeExchange((exchanges) -> exchanges
+                        .anyExchange().authenticated()
                 )
                 .httpBasic(withDefaults())
                 .anonymous(ServerHttpSecurity.AnonymousSpec::disable)

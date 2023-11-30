@@ -1,16 +1,17 @@
 package com.gyp.jx.file.management.utils;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import lombok.extern.log4j.Log4j2;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * 读取大图片的分辨率
@@ -18,6 +19,7 @@ import javax.imageio.stream.ImageInputStream;
  * @author 远方bruce
  * 
  */
+@Log4j2
 public class ReadResolutionUtil {
 
 	/**
@@ -38,7 +40,7 @@ public class ReadResolutionUtil {
 				int height = reader.getHeight(reader.getMinIndex());
 				result = new Dimension(width, height);
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 		return result;

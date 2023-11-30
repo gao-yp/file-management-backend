@@ -54,7 +54,7 @@ public class CommController {
             return Mono.just(ResponseEntity.badRequest().build());
         }
         Path path = Paths.get(url);
-        Resource resource = null;
+        Resource resource;
         try {
             resource = new UrlResource(path.toUri());
         } catch (MalformedURLException e) {
@@ -64,7 +64,7 @@ public class CommController {
         if (!resource.exists() || !resource.isReadable()) {
             return Mono.just(ResponseEntity.notFound().build());
         }
-        long contentLength = 0;
+        long contentLength;
         try {
             contentLength = resource.contentLength();
         } catch (IOException e) {

@@ -1,19 +1,13 @@
 package com.gyp.jx.file.management.utils.crypto;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.security.Key;
-import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+import java.io.*;
+import java.security.Key;
+import java.security.SecureRandom;
 
 /**
  * PBE安全编码组件
@@ -120,7 +114,7 @@ public abstract class PBECoder {
 	public static void encryptFile(File srcFile, File encFile, String pwd, byte[] salt) throws Exception {
 		try (InputStream in = new FileInputStream(srcFile);
 				ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-				OutputStream out2 = new FileOutputStream(encFile);) {
+				OutputStream out2 = new FileOutputStream(encFile)) {
 			byte[] buffer = new byte[1024];
 			int len;
 			while ((len = in.read(buffer)) > 0) {
@@ -143,7 +137,7 @@ public abstract class PBECoder {
 	public static void decryptFile(File encFile, File decFile, String pwd, byte[] salt) throws Exception {
 		try (InputStream in = new BufferedInputStream(new FileInputStream(encFile));
 				ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-				OutputStream out2 = new FileOutputStream(decFile);) {
+				OutputStream out2 = new FileOutputStream(decFile)) {
 			byte[] buffer = new byte[1024];
 			int len;
 			while ((len = in.read(buffer)) > 0) {
@@ -156,7 +150,7 @@ public abstract class PBECoder {
 
 	public static byte[] decryptFile(File encFile, String pwd, byte[] salt) throws Exception {
 		try (InputStream in = new BufferedInputStream(new FileInputStream(encFile));
-				ByteArrayOutputStream out = new ByteArrayOutputStream(1024);) {
+				ByteArrayOutputStream out = new ByteArrayOutputStream(1024)) {
 			byte[] buffer = new byte[1024];
 			int len;
 			while ((len = in.read(buffer)) > 0) {

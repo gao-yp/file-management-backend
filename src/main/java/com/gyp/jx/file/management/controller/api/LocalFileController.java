@@ -37,7 +37,7 @@ public class LocalFileController {
     public ResponseEntity<ResultBody> list(@RequestParam(value = "path", required = false) String dirUrl4Encode,
                                            @RequestParam(defaultValue = "0") Integer startNum,
                                            @RequestParam(defaultValue = "10") Integer pageSize) throws Exception {
-        String dirUrl = "";
+        String dirUrl;
         if (StringUtils.isBlank(dirUrl4Encode)) {
             dirUrl = String.valueOf(defaultHome);
         } else {
@@ -56,7 +56,7 @@ public class LocalFileController {
     public ResponseEntity<ResultBody> keywordSearchList(FileSearchTypeEnum searchType,
                                                         @RequestParam(value = "path") String dirUrl4Encode,
                                                         String keyword) throws Exception {
-        String dirUrl = "";
+        String dirUrl;
         if (StringUtils.isBlank(dirUrl4Encode)) {
             dirUrl = String.valueOf(defaultHome);
         } else {
